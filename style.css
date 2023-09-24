@@ -1,0 +1,160 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.container{
+    height: 300px;
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    z-index: 1;
+    position: relative;
+    text-align: center;
+}
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottom{
+    border-bottom: 2px solid black;
+}
+.right{
+    border-right: 2px solid black;
+}
+
+.ball{
+    height: 60px;
+    width: 60px;
+    background-color: transparent;
+    border: 4px solid blue;
+    border-radius: 50%;
+}
+
+.x {
+    position: relative;
+    height: 64px; 
+    width: 64px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.x::before,
+.x::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 4px; 
+    background-color: red;
+}
+
+.x::before {
+    transform: rotate(45deg);
+}
+
+.x::after {
+    transform: rotate(-45deg);
+}
+
+.popup_box{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    background-color: #0000008f;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    display: none;
+}
+.popup{
+    position: relative;
+    height: 450px;
+    width: 400px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+header{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 25%;
+    padding-left: 40px;
+}
+.body{
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    top: 30%;
+    left: 70px;
+}
+label{
+    display: block;
+    margin: 10px 0px;
+}
+input{
+    display: block;
+    height: 30px;
+    width: 250px;
+}
+button{
+    height: 40px;
+    width: 150px;
+    font-size: 16px;
+    background-color: #84c6ec;
+    border: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.startButton{
+    position: absolute;
+    left: 50%;
+    margin-left: -145px;
+}
+#second{
+    margin-bottom: 50px;
+}
+.newGame{
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    margin-left: -75px;
+    bottom: 0;
+    margin-bottom: -120px;
+}
+.show{
+    opacity: 1;
+    display: flex;
+    z-index: 2;
+}
+.newGame.show{
+    display: block;
+}
+.info{
+    width: 200px;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    bottom: 0;
+    margin-bottom: -50px;
+}
+
+@media (min-device-width: 200px) and (max-device-width: 800px) {
+    .popup{
+        height: 100vh;
+        width: 100vw;
+    }
+    .body{
+        top: 20%;
+    }
+}
