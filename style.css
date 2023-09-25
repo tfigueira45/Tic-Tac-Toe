@@ -6,6 +6,7 @@ body{
     align-items: center;
     margin: 0;
     font-family: sans-serif;
+    background-color: #cccaca;
 }
 
 .container{
@@ -17,24 +18,34 @@ body{
     z-index: 1;
     position: relative;
     text-align: center;
+    gap: 4px;
 }
 .box{
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1.5px solid black;
+    transition: .4s all;
+    background-color: #c5d8e4;
 }
-.bottom{
-    border-bottom: 2px solid black;
+.box:first-child{
+    border-top-left-radius: 10px;
 }
-.right{
-    border-right: 2px solid black;
+.box:nth-child(3){
+    border-top-right-radius: 10px;
+}
+.box:nth-child(7){
+    border-bottom-left-radius: 10px;
+}
+.box:nth-child(9){
+    border-bottom-right-radius: 10px;
 }
 
 .ball{
     height: 60px;
     width: 60px;
     background-color: transparent;
-    border: 4px solid blue;
+    border: 4px solid #1b85b6;
     border-radius: 50%;
 }
 
@@ -52,7 +63,8 @@ body{
     content: '';
     width: 100%;
     height: 4px; 
-    background-color: red;
+    background-color: #c01f1f;
+    transition: .4s all;
 }
 
 .x::before {

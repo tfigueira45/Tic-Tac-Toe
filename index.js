@@ -24,8 +24,6 @@ function gameMap(player) {
   });
 }
 
-
-
 function check() {
   let bIndex = 0;
   let xIndex = 0;
@@ -119,8 +117,9 @@ function newGame() {
   showPopup();
 }
 
-window.addEventListener("load", function () {
-  showPopup();
-});
-
 newGameButton.addEventListener("click", newGame);
+
+showPopup();
+
+
+
