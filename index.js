@@ -24,18 +24,32 @@ function gameMap(player) {
   });
 }
 
+
+
 function check() {
+  let bIndex = 0;
+  let xIndex = 0;
   for (let i = 0; i < wins.length; i++) {
-    let gameMapBall = JSON.stringify(gameMap("ball"));
-    let gameMapX = JSON.stringify(gameMap("x"));
-    let winsStr = JSON.stringify(wins[i]);
-    if (gameMapBall.includes(winsStr) || gameMapX.includes(winsStr)) {
+    let gameMapBall = gameMap("ball");
+    let gameMapX = gameMap("x");
+    let winsStr = wins[i];
+    winsStr.map((item) => {
+      if (gameMapBall.includes(item)) {
+        bIndex++;
+      }else if(gameMapX.includes(item)){
+        xIndex++
+      }
+    });
+    if (xIndex === 3 || bIndex === 3) {
       return true;
-    } else if (gameMap("ball").length + gameMap("x").length === 9) {
-      return undefined;
-    } else {
-      return false;
     }
+    xIndex = 0
+    bIndex = 0
+  }
+  if (gameMap("ball").length + gameMap("x").length === 9) {
+    return undefined;
+  } else {
+    return false;
   }
 }
 
@@ -53,7 +67,7 @@ function showPopup() {
       let playerTwo = secondInput.value;
       users = { true: playerOne, false: playerTwo };
       document.querySelector(".popup_box").classList.remove("show");
-      newGameButton.classList.remove('show')
+      newGameButton.classList.remove("show");
       inicializeGame();
     }
   });
