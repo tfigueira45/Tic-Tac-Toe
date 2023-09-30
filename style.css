@@ -4,29 +4,31 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
     font-family: sans-serif;
-    background-color: #cccaca;
+    background-color: #949494;
+    margin: 0;
 }
 
 .container{
-    height: 300px;
-    width: 300px;
-    display: grid;
-    grid-template-columns: repeat(3,100px);
-    grid-template-rows: repeat(3,100px);
     z-index: 1;
     position: relative;
     text-align: center;
-    gap: 4px;
+}
+.game{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    gap: 6px;
+    margin-bottom: 30px;
 }
 .box{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1.5px solid black;
+    border: 1.5px solid #bbb9b9;
     transition: .4s all;
-    background-color: #c5d8e4;
+    background-color: #bdd2df;
+    cursor: pointer;
 }
 .box:first-child{
     border-top-left-radius: 10px;
@@ -75,6 +77,20 @@ body{
     transform: rotate(-45deg);
 }
 
+.win{
+    transform: scale(.98);
+}
+
+.win.blue{
+    background-color: #a2d8f1;
+    border: #a2d8f1;
+}
+
+.win.red{
+    background-color: #f06969;
+    border: #f06969;
+}
+
 .popup_box{
     position: absolute;
     left: 0;
@@ -90,24 +106,18 @@ body{
 }
 .popup{
     position: relative;
-    height: 450px;
     width: 400px;
     background-color: aliceblue;
     border-radius: 10px;
 }
 header{
-    position: absolute;
-    top: 0;
     width: 100%;
-    height: 25%;
-    padding-left: 40px;
+    text-align: center;
+    margin-bottom: 35px;
 }
 .body{
-    width: 100%;
-    height: 75%;
-    position: absolute;
-    top: 30%;
-    left: 70px;
+    width: 250px;
+    margin: auto;
 }
 label{
     display: block;
@@ -126,47 +136,25 @@ button{
     border: transparent;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
+    margin: auto;
 }
 .startButton{
-    position: absolute;
-    left: 50%;
-    margin-left: -145px;
-}
-#second{
-    margin-bottom: 50px;
+    margin: 50px auto;
 }
 .newGame{
     opacity: 0;
-    position: absolute;
-    left: 50%;
-    margin-left: -75px;
-    bottom: 0;
-    margin-bottom: -120px;
+    display: block !important;
+    margin: 20px auto 0;
 }
 .show{
     opacity: 1;
     display: flex;
     z-index: 2;
 }
-.newGame.show{
-    display: block;
-}
-.info{
-    width: 200px;
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-    bottom: 0;
-    margin-bottom: -50px;
-}
 
 @media (min-device-width: 200px) and (max-device-width: 800px) {
     .popup{
-        height: 100vh;
-        width: 100vw;
-    }
-    .body{
-        top: 20%;
+        width: calc(100vw - 55px);
     }
 }

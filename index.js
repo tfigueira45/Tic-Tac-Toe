@@ -30,8 +30,8 @@ function check() {
   for (let i = 0; i < wins.length; i++) {
     let gameMapBall = gameMap("ball");
     let gameMapX = gameMap("x");
-    let winsStr = wins[i];
-    winsStr.map((item) => {
+    let win = wins[i];
+    win.map((item) => {
       if (gameMapBall.includes(item)) {
         bIndex++;
       }else if(gameMapX.includes(item)){
@@ -39,15 +39,15 @@ function check() {
       }
     });
     if (xIndex === 3 || bIndex === 3) {
-      return true;
+      return [true, win];
     }
     xIndex = 0
     bIndex = 0
   }
   if (gameMap("ball").length + gameMap("x").length === 9) {
-    return undefined;
+    return [undefined];
   } else {
-    return false;
+    return [false];
   }
 }
 
@@ -55,6 +55,13 @@ function fillAllBoxes() {
   boxes.forEach((item) => {
     item.classList.add("fakeFill");
   });
+}
+
+function winAnimation(user,winMap){
+  const color = user ? 'blue' : 'red'
+  winMap.forEach((i) => {
+    boxes[i].classList.add('win', color)
+  })
 }
 
 function showPopup() {
@@ -84,13 +91,14 @@ function inicializeGame() {
         !box.classList.contains("fakeFill")
       ) {
         child.classList.add(user ? "ball" : "x");
-        if (check() === true) {
+        if (check()[0] === true) {
           fillAllBoxes();
           document.querySelector(".info").textContent = `${
             users[String(user)]
           } venceu o jogo!`;
+          winAnimation(user,check()[1])
           newGameButton.classList.add("show");
-        } else if (check() === false) {
+        } else if (check()[0] === false) {
           user = !user;
           document.querySelector(".info").textContent = `É a vez de ${
             users[String(user)]
@@ -106,7 +114,7 @@ function inicializeGame() {
 
 function newGame() {
   boxes.forEach(function (box) {
-    box.classList.remove("fakeFill");
+    box.classList.remove("fakeFill","win","red","blue");
   });
   document.querySelectorAll(".ball").forEach(function (item) {
     item.classList.remove("ball");
