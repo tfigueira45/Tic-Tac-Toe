@@ -5,6 +5,17 @@ const newGameButton = document.querySelector(".newGame");
 let user = Boolean(Math.round(Math.random()));
 let users;
 
+const wins = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 function gameMap(player) {
   return Array.from(document.querySelectorAll(`.${player}`)).map(function (
     item
@@ -13,43 +24,31 @@ function gameMap(player) {
   });
 }
 
-function getWin(map){
-  for(i = 0; i < map.length; i++){
-    const pos = map[i]
-
-    for(j = 0; j < map.length; j++){
-      const item = map[j]
-      
-      if(pos != item) {
-        console.log(pos, item)
-        const x = [item, pos].sort((a,b) => a - b)
-        const y = Math.abs(item - pos)
-        const psbWin = [...x, x[1] + y]
-
-        if([1, 2, 3, 4].includes(y)){
-
-          if (map.includes(pos && item && psbWin[2])) {
-            console.log(psbWin)
-            return [true, psbWin]
-          }
-        }
-      }
-    }
-  }
-}
-
 function check() {
-  let gameMapBall = gameMap("ball")
-  let gameMapX = gameMap("x")
-  getWin(gameMapBall)
-  getWin(gameMapX)
-
-  if (gameMapBall.length + gameMapX.length !== 9) {
+  let bIndex = 0;
+  let xIndex = 0;
+  for (let i = 0; i < wins.length; i++) {
+    let gameMapBall = gameMap("ball");
+    let gameMapX = gameMap("x");
+    let win = wins[i];
+    win.map((item) => {
+      if (gameMapBall.includes(item)) {
+        bIndex++;
+      }else if(gameMapX.includes(item)){
+        xIndex++
+      }
+    });
+    if (xIndex === 3 || bIndex === 3) {
+      return [true, win];
+    }
+    xIndex = 0
+    bIndex = 0
+  }
+  if (gameMap("ball").length + gameMap("x").length === 9) {
+    return [undefined];
+  } else {
     return [false];
   }
-
-  return []
-
 }
 
 function fillAllBoxes() {
@@ -129,3 +128,4 @@ function newGame() {
 newGameButton.addEventListener("click", newGame);
 
 showPopup();
+
